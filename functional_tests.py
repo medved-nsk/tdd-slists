@@ -13,7 +13,6 @@ class NewVisitorTest(unittest.TestCase):
 	def test_can_start_a_list_and_retrieve_it_later(self):
 		self.browser.get('http://localhost:8000')
 		self.assertIn('To-Do', self.browser.title)
-		self.assertIn('To-Do', header_text)
 
 		inputbox = self.browser.find_element_by_id('id_new_item')
 		self.assertEqual(
@@ -27,7 +26,8 @@ class NewVisitorTest(unittest.TestCase):
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
 		self.assertTrue(
-			any(row.text == '1: Kauf der Spiegel!' for row in rows)
+			any(row.text == '1: Kauf der Spiegel!' for row in rows),
+			"New to-do item did appear in table"
 		)
 
 		self.fail('Finish the test!')
